@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sales Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="page">
+    <aside class="sidebar">
+        <h2>SalesPro</h2>
+        <ul>
+            <li class="active">Dashboard</li>
+            <li>Reports</li>
+            <li>Upload Data</li>
+        </ul>
+    </aside>
+
+    <!-- IMPORTANT LINE: centers content when no data -->
+    <main class="content {% if total_sales is none %}centered{% endif %}">
+
+        <!-- Upload Card -->
+        <div class="card">
+            <h1>Sales Dashboard</h1>
+            <p class="subtitle">Upload your CSV to view insights</p>
+
+            <form method="POST" enctype="multipart/form-data" class="upload-form">
+                <input type="file" name="file" required>
+                <button type="submit">Upload CSV</button>
+            </form>
+        </div>
+
+        {% if total_sales is not none %}
+
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat-box">
+                <span>Total Sales</span>
+                <strong>₹ {{ total_sales }}</strong>
+            </div>
+            <div class="stat-box">
+                <span>Categories</span>
+                <strong>{{ category_sales|length }}</strong>
+            </div>
+        </div>
+
+        <!-- Charts + Table -->
+        <div class="grid">
+            <div class="card">
+                <h3>Sales by Category</h3>
+                <table>
+                    <tr>
+                        <th>Category</th>
+                        <th>Amount</th>
+                    </tr>
+                    {% for cat, amt in category_sales.items() %}
+                    <tr>
+                        <td>{{ cat }}</td>
+                        <td>₹ {{ amt }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>Daily Sales Trend</h3>
+                <img src="/{{ chart_path }}" class="chart" alt="Sales Chart">
+            </div>
+        </div>
+
+        {% endif %}
+    </main>
+</div>
+
+</body>
+</html>
