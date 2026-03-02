@@ -8,11 +8,7 @@ Upload a CSV file and instantly visualize key sales metrics including total reve
 🚀 Live Demo
 
 🔗 Live App: https://your-app-name.onrender.com
-
-📽 Demo Video: (add your video link here)
-
 🧩 Problem Statement
-
 Small businesses often store sales data in CSV files but lack simple tools to analyze trends without technical expertise.
 This project solves that by offering an easy-to-use dashboard that converts raw sales data into meaningful insights.
 
